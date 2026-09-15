@@ -17,7 +17,7 @@ const CLIENT_ID = process.env.CLIENT_ID;
 
 const methods = [
   { id: "fisch", name: "FISCH", emoji: "🎣", description: "Fisch method guide", text: "━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌸 𝗙𝗜𝗦𝗖𝗛 𝗠𝗘𝗧𝗛𝗢𝗗 𝗕𝗘𝐀𝗠 🌸
+text: `🌸 FISCH METHOD BEAM 🌸
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 📌 𝐅𝐈𝐑𝐒𝐓 𝐓𝐇𝐈𝐍𝐆𝐒 𝐅𝐈𝐑𝐒𝐓!
@@ -37,7 +37,8 @@ const methods = [
 🌸 Dream Orchid
 
 💎 MLF: Offers / Gems
-📩 DM to negotiate!" },
+📩 DM to negotiate!`
+},
   { id: "rivals", name: "RIVALS", emoji: "⚔️", description: "Rivals method guide", text: "━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⚔️ 𝗥𝗜𝗩𝗔𝗟𝗦 𝗠𝗘𝗧𝗛𝗢𝗗 𝗕𝗘𝐀𝗠 ⚔️
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
