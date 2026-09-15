@@ -396,15 +396,17 @@ const client = new Client({
 
 client.once(Events.ClientReady, async (bot) => {
   console.log(`✅ ${bot.user.tag} is online.`);
+  console.log("DEBUG  TOKEN prefix :", TOKEN ? TOKEN.slice(0, 10) + "..." : "kosong");
+  console.log("DEBUG  CLIENT_ID    :", CLIENT_ID);
+  console.log("DEBUG  GUILD_ID     :", GUILD_ID);
+  console.log("DEBUG  bot.user.id  :", bot.user.id);
 
   if (CLIENT_ID && TOKEN && GUILD_ID) {
     try {
       const rest = new REST({ version: "10" }).setToken(TOKEN);
 
-      // hapus global command biar gak dobel
       await rest.put(Routes.applicationCommands(CLIENT_ID), { body: [] });
 
-      // register ke guild — instant
       await rest.put(
         Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
         {
