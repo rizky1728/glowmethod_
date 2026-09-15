@@ -1,5 +1,5 @@
 // language: JavaScript, file: index.js, runtime: Node 18+, target: Discord.js v14
-// env: DISCORD_TOKEN, CLIENT_ID
+// env: DISCORD_TOKEN, CLIENT_ID, GUILD_ID
 
 const {
   Client,
@@ -17,6 +17,7 @@ const {
 
 const TOKEN = process.env.DISCORD_TOKEN;
 const CLIENT_ID = process.env.CLIENT_ID;
+const GUILD_ID = process.env.GUILD_ID;
 
 const methods = [
   {
@@ -396,23 +397,32 @@ const client = new Client({
 client.once(Events.ClientReady, async (bot) => {
   console.log(`✅ ${bot.user.tag} is online.`);
 
-  if (CLIENT_ID && TOKEN) {
+  if (CLIENT_ID && TOKEN && GUILD_ID) {
     try {
       const rest = new REST({ version: "10" }).setToken(TOKEN);
 
-      await rest.put(Routes.applicationCommands(CLIENT_ID), {
-        body: [
-          {
-            name: "method",
-            description: "Open the private GlowMethod menu."
-          }
-        ]
-      });
+      // hapus global command biar gak dobel
+      await rest.put(Routes.applicationCommands(CLIENT_ID), { body: [] });
 
-      console.log("✅ /method registered.");
+      // register ke guild — instant
+      await rest.put(
+        Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
+        {
+          body: [
+            {
+              name: "method",
+              description: "Open the private GlowMethod menu."
+            }
+          ]
+        }
+      );
+
+      console.log("✅ /method registered (guild-scoped).");
     } catch (error) {
       console.error("Could not register /method:", error);
     }
+  } else {
+    console.error("❌ CLIENT_ID atau GUILD_ID belum di-set.");
   }
 });
 
